@@ -1,65 +1,163 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Image from "next/image";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+
+export default function HomePage() {
+  useRevealOnScroll(".reveal");
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="container">
+          <div className="hero-content">
+            <h1 className="hero-title fade-in delay-1">
+              Responsible Mineral Development
+            </h1>
+
+            <p className="hero-subtitle fade-in delay-2">
+              Delivering sustainable extraction and mineral development across
+              Southern Africa through disciplined operations, technology, and
+              environmental stewardship.
+            </p>
+
+            <a href="#" className="btn fade-in delay-3">
+              Learn More
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Profile */}
+      <section className="section gray">
+        <div className="container">
+          <div className="profile-grid">
+            {/* Text */}
+            <div>
+              <span className="section-kicker">Company</span>
+
+              <h2 className="section-title">Company Profile</h2>
+
+              <p className="section-subtitle">
+                Innocent Resources Corporation Limited operates across Namibia,
+                Botswana, and South Africa, advancing exploration, mining, and
+                beneficiation of critical minerals.
+              </p>
+
+              <p style={{ marginTop: 16, color: "var(--text-muted)" }}>
+                Our operations are guided by disciplined execution,
+                environmental responsibility, and long-term value creation
+                for communities and stakeholders.
+              </p>
+
+              <a
+                href="/company"
+                className="btn-outline"
+                style={{ marginTop: 32 }}
+              >
+                Learn More About Us
+              </a>
+            </div>
+
+            {/* Image */}
+            <div className="profile-image">
+              <Image
+                src="/company-profile.jpeg"
+                alt="Field mining operations"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Focus */}
+      <section className="section">
+        <div className="container">
+          <span className="section-kicker reveal delay-1">
+            What We Do
+          </span>
+
+          <h2 className="section-title reveal delay-2">
+            Our Focus
+          </h2>
+
+          <p className="section-subtitle reveal delay-3">
+            Our activities are centered on disciplined resource development,
+            responsible mining operations, and long-term value creation
+            across Southern Africa.
           </p>
+
+          <div className="focus-grid">
+            <div className="focus-item reveal delay-1">
+              <h3 className="focus-title">
+                Exploration & Resource Development
+              </h3>
+              <p className="focus-text">
+                Identification and evaluation of high-potential mineral
+                assets using modern geological techniques and data-driven
+                analysis.
+              </p>
+            </div>
+
+            <div className="focus-item reveal delay-2">
+              <h3 className="focus-title">
+                Responsible Mining Operations
+              </h3>
+              <p className="focus-text">
+                Open-cast mining and beneficiation processes executed with
+                strict operational discipline, safety standards, and
+                regulatory compliance.
+              </p>
+            </div>
+
+            <div className="focus-item reveal delay-3">
+              <h3 className="focus-title">
+                Technology-Enabled Discovery
+              </h3>
+              <p className="focus-text">
+                Integration of advanced exploration technologies, including
+                geospatial analysis, modeling, and field validation.
+              </p>
+            </div>
+
+            <div className="focus-item reveal delay-4">
+              <h3 className="focus-title">
+                Environmental & Community Stewardship
+              </h3>
+              <p className="focus-text">
+                Commitment to minimizing environmental impact, supporting
+                host communities, and aligning operations with long-term
+                sustainability.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* News Section */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">News & Press Releases</h2>
+
+          <div className="card-grid">
+            {[1, 2, 3, 4].map((item) => (
+              <div className="card" key={item}>
+                <h4>Blog Title</h4>
+                <p>
+                  Brief summary of the article or press release highlighting
+                  operational updates or corporate announcements.
+                </p>
+                <a href="#" className="btn" style={{ marginTop: 16 }}>
+                  Read More
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
