@@ -237,12 +237,12 @@ export default function CompanyPage() {
     
                 <p style={{ marginTop: 16 }}>
                   <strong>General Inquiries:</strong><br />
-                  info@innocentresources.com
+                  Info@InnocentResources.com
                 </p>
     
                 <p style={{ marginTop: 16 }}>
                   <strong>Emergency & Site Safety Hotline:</strong><br />
-                  +27 (0)XX XXX XXXX
+                  +27 79 919 0205
                 </p>
               </div>
             </div>

@@ -33,7 +33,11 @@ export default function Footer() {
           </p>
           <p className="footer-text">
             Safety Hotline:<br />
-            <strong>+27 XXX XXX XXX</strong>
+            <strong>+27 79 919 0205</strong>
+          </p>
+          <p className="footer-text">
+            Email:<br />
+            <strong>Info@InnocentResources.com</strong>
           </p>
         </div>
       </div>
