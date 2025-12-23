@@ -29,11 +29,10 @@ export default function CompanyPage() {
           <div>
             <h2 className="section-title reveal">Who We Are?</h2>
             <p className="section-subtitle reveal delay-1">
-              Innocent Resources Corporation Limited operates across Namibia,
-              Botswana, and South Africa, advancing projects from exploration
-              through operational deployment. Our activities integrate modern
-              technologies, environmental safeguards, and strong governance
-              frameworks.
+              Innocent Resources Corporation Limited operates across Southern Africa, 
+              advancing projects from exploration through operational deployment. 
+              Our activities integrate modern technologies, environmental safeguards, 
+              and strong governance frameworks.
             </p>
             <p className="reveal delay-2" style={{ color: "var(--text-muted)" }}>
               The company focuses on delivering reliable mineral supply chains

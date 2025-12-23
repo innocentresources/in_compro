@@ -1,15 +1,19 @@
 import "./globals.css";
-import { ReactNode } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const metadata = {
+  title: "Innocent Resources",
+  description: "Responsible mineral development across Southern Africa",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body className="antialiased">
+        {children}
       </body>
     </html>
   );

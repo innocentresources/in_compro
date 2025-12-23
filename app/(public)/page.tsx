@@ -120,6 +120,60 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Our Approach */}
+      <section className="section gray">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+
+            {/* Text */}
+            <div className="reveal">
+              <span className="section-kicker">
+                Our Approach
+              </span>
+
+              <h2 className="section-title">
+                Disciplined, Responsible Resource Development
+              </h2>
+
+              <p className="section-subtitle mt-4">
+                We apply a structured, long-term approach to mineral exploration
+                and development, balancing technical rigor with environmental
+                and social responsibility.
+              </p>
+
+              <p style={{ marginTop: 16, color: "var(--text-muted)" }}>
+                From early-stage exploration through to potential production,
+                our teams operate under clear governance frameworks, strict
+                safety standards, and a commitment to transparent stakeholder
+                engagement.
+              </p>
+
+              <ul style={{ marginTop: 24 }} className="focus-list">
+                <li>Disciplined capital allocation and project evaluation</li>
+                <li>Strong emphasis on safety, compliance, and risk management</li>
+                <li>Integration of ESG principles into operational decision-making</li>
+                <li>Long-term partnerships with host communities and regulators</li>
+              </ul>
+            </div>
+
+            {/* Image */}
+            <div className="reveal delay-1">
+              <div className="relative w-full h-[420px] rounded-lg overflow-hidden">
+                <Image
+                  src="/our_approach.jpeg"
+                  alt="Operational planning and field execution"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
       {/* News Section */}
       <section className="section">
         <div className="container">
