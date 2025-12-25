@@ -1,35 +1,19 @@
-import type { Metadata } from "next";
 import InsightsClient from "./InsightsClient";
 
-const PAGE_SIZE = 6;
-
-function humanizeCategory(cat: string) {
-  return cat.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
-}
-
-export function generateMetadata({
+export default async function Page({
   searchParams,
 }: {
-  searchParams?: { category?: string };
-}): Metadata {
-  const category = searchParams?.category;
-
-  return {
-    title: category
-      ? `${humanizeCategory(category)} | Insights`
-      : "Insights | Innocent Resources",
-    description:
-      "Latest press releases, news, and insights from Innocent Resources Corporation Limited.",
-  };
-}
-
-export default function InsightsPage({
-  searchParams,
-}: {
-  searchParams?: { category?: string; page?: string };
+  searchParams?: { page?: string; category?: string };
 }) {
-  const page = Math.max(1, Number(searchParams?.page ?? 1) || 1);
-  const category = searchParams?.category ?? null;
+  const page = Number(searchParams?.page ?? 1);
+  const category = searchParams?.category ?? "";
 
-  return <InsightsClient page={page} pageSize={PAGE_SIZE} category={category} />;
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/insights?page=${page}&category=${category}`,
+    { cache: "no-store" }
+  );
+
+  const json = await res.json();
+
+  return <InsightsClient data={json.items} />;
 }
