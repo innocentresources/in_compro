@@ -1,144 +1,119 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 type Category = "PRESS_RELEASE" | "BLOG" | "NEWS" | "UPDATE";
 type Status = "DRAFT" | "PUBLISHED";
 
-const mockInsight = {
-  id: "1",
-  title: "Innocent Resources Advances Exploration Activities in Namibia",
-  slug: "innocent-resources-advances-exploration-activities-in-namibia",
-  excerpt:
-    "The company has expanded its exploration footprint in Namibia, advancing early-stage geological surveys.",
-  content:
-    "## Exploration Update\n\nInnocent Resources has initiated expanded exploration programs across Namibia.\n\n- Geological mapping\n- Sampling campaigns\n- Early-stage drilling",
-  category: "PRESS_RELEASE" as Category,
-  status: "PUBLISHED" as Status,
-};
-
-const existingSlugs = [
-  "innocent-resources-advances-exploration-activities-in-namibia",
-  "sustainability-framework-implementation",
-  "community-engagement-update",
-];
-
 export default function EditInsightPage() {
+  const { id } = useParams<{ id: string }>();
   const router = useRouter();
-  const params = useParams();
 
-  const [title, setTitle] = useState(mockInsight.title);
-  const [slug, setSlug] = useState(mockInsight.slug);
-  const [excerpt, setExcerpt] = useState(mockInsight.excerpt);
-  const [content, setContent] = useState(mockInsight.content);
-  const [category, setCategory] = useState<Category>(mockInsight.category);
-  const [status, setStatus] = useState<Status>(mockInsight.status);
-  const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [excerpt, setExcerpt] = useState("");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState<Category>("PRESS_RELEASE");
+  const [status, setStatus] = useState<Status>("DRAFT");
 
-  function toSlug(value: string) {
-    return value
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+
+  function slugify(v: string) {
+    return v
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
   }
 
-  function generateUniqueSlug(base: string) {
-    if (base === mockInsight.slug) return base;
-
-    let unique = base;
-    let counter = 2;
-
-    while (
-      existingSlugs.includes(unique) &&
-      unique !== mockInsight.slug
-    ) {
-      unique = `${base}-${counter}`;
-      counter++;
-    }
-
-    return unique;
-  }
-
-  function handleTitleChange(value: string) {
-    setTitle(value);
-    const base = toSlug(value);
-    const unique = generateUniqueSlug(base);
-    setSlug(unique);
-  }
+  useEffect(() => {
+    fetch(`/api/insights/${id}`, { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        setTitle(d.title);
+        setSlug(d.slug);
+        setExcerpt(d.excerpt || "");
+        setContent(d.content || "");
+        setCategory(d.category);
+        setStatus(d.status);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
+    setSaving(true);
+    setError("");
 
-    const payload = {
-      id: params.id,
-      title,
-      slug,
-      excerpt,
-      content,
-      category,
-      status,
-    };
+    const res = await fetch(`/api/insights/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        slug,
+        excerpt,
+        content,
+        category,
+        status,
+      }),
+    });
 
-    console.log("UPDATED INSIGHT:", payload);
+    if (!res.ok) {
+      const j = await res.json();
+      setError(j.error || "Failed to update insight");
+      setSaving(false);
+      return;
+    }
 
-    setTimeout(() => {
-      setLoading(false);
-      router.push("/admin/insights");
-    }, 800);
+    router.push("/admin/insights");
+  }
+
+  if (loading) {
+    return (
+      <div className="py-20 text-center text-gray-500">Loading…</div>
+    );
   }
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-12">
-      <header className="mb-8">
-        <h1 className="text-2xl font-semibold">Edit Insight</h1>
-        <p className="text-sm text-gray-600 mt-1">
-          Update existing press release, blog, or news article
-        </p>
-      </header>
+      <h1 className="text-2xl font-semibold mb-6">Edit Insight</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-8 bg-white border border-gray-200 rounded-lg p-8"
-      >
+      {error && (
+        <div className="mb-4 rounded bg-red-50 text-red-700 px-4 py-2 text-sm">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6 bg-white border rounded-lg p-8">
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Title
-          </label>
+          <label className="block text-sm font-medium mb-1">Title</label>
           <input
-            type="text"
             value={title}
-            onChange={(e) => handleTitleChange(e.target.value)}
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/10"
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setSlug(slugify(e.target.value));
+            }}
+            className="w-full border rounded px-3 py-2 text-sm"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Slug
-          </label>
+          <label className="block text-sm font-medium mb-1">Slug</label>
           <input
-            type="text"
             value={slug}
-            onChange={(e) => setSlug(toSlug(e.target.value))}
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/10"
+            onChange={(e) => setSlug(slugify(e.target.value))}
+            className="w-full border rounded px-3 py-2 text-sm bg-gray-50"
           />
-          <p className="mt-1 text-xs text-gray-400">
-            URL: /insights/{slug}
-          </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Category
-          </label>
+          <label className="block text-sm font-medium mb-1">Category</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as Category)}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/10"
+            className="w-full border rounded px-3 py-2 text-sm"
           >
             <option value="PRESS_RELEASE">Press Release</option>
             <option value="BLOG">Blog</option>
@@ -148,13 +123,11 @@ export default function EditInsightPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Status
-          </label>
+          <label className="block text-sm font-medium mb-1">Status</label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as Status)}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/10"
+            className="w-full border rounded px-3 py-2 text-sm"
           >
             <option value="DRAFT">Draft</option>
             <option value="PUBLISHED">Published</option>
@@ -162,44 +135,40 @@ export default function EditInsightPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Excerpt
-          </label>
+          <label className="block text-sm font-medium mb-1">Excerpt</label>
           <textarea
             value={excerpt}
             onChange={(e) => setExcerpt(e.target.value)}
             rows={3}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/10"
+            className="w-full border rounded px-3 py-2 text-sm"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Content
-          </label>
+          <label className="block text-sm font-medium mb-1">Content</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={10}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-mono focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/10"
+            className="w-full border rounded px-3 py-2 text-sm font-mono"
           />
         </div>
 
-        <div className="flex items-center justify-between pt-4 border-t">
+        <div className="flex justify-end gap-3">
           <button
             type="button"
             onClick={() => router.back()}
-            className="text-sm text-gray-600 hover:underline"
+            className="px-4 py-2 text-sm border rounded"
           >
             Cancel
           </button>
 
           <button
             type="submit"
-            disabled={loading}
-            className="rounded-md bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 transition disabled:opacity-50"
+            disabled={saving}
+            className="px-5 py-2 text-sm rounded bg-gray-900 text-white"
           >
-            {loading ? "Saving…" : "Update Insight"}
+            {saving ? "Saving…" : "Update Insight"}
           </button>
         </div>
       </form>

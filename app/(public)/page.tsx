@@ -173,28 +173,6 @@ export default function HomePage() {
         </div>
       </section>
 
-
-      {/* News Section */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title">News & Press Releases</h2>
-
-          <div className="card-grid">
-            {[1, 2, 3, 4].map((item) => (
-              <div className="card" key={item}>
-                <h4>Blog Title</h4>
-                <p>
-                  Brief summary of the article or press release highlighting
-                  operational updates or corporate announcements.
-                </p>
-                <a href="#" className="btn" style={{ marginTop: 16 }}>
-                  Read More
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }

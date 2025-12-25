@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 type Category = "PRESS_RELEASE" | "BLOG" | "NEWS" | "UPDATE";
@@ -12,65 +12,53 @@ type Insight = {
   slug: string;
   category: Category;
   status: Status;
-  publishedAt: string;
+  createdAt: string;
 };
 
-const initialInsights: Insight[] = [
-  {
-    id: "1",
-    title: "Innocent Resources Advances Exploration Activities in Namibia",
-    slug: "innocent-resources-advances-exploration-activities-in-namibia",
-    category: "PRESS_RELEASE",
-    status: "PUBLISHED",
-    publishedAt: "2025-01-10",
-  },
-  {
-    id: "2",
-    title: "Sustainability Framework Implementation",
-    slug: "sustainability-framework-implementation",
-    category: "BLOG",
-    status: "DRAFT",
-    publishedAt: "2025-01-05",
-  },
-  {
-    id: "3",
-    title: "Community Engagement Update",
-    slug: "community-engagement-update",
-    category: "NEWS",
-    status: "PUBLISHED",
-    publishedAt: "2025-01-02",
-  },
-];
-
 export default function InsightsAdminPage() {
-  const [insights, setInsights] = useState(initialInsights);
+  const [items, setItems] = useState<Insight[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<"ALL" | Category>("ALL");
   const [status, setStatus] = useState<"ALL" | Status>("ALL");
+
+  const [loading, setLoading] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const filteredInsights = useMemo(() => {
-    return insights.filter((item) => {
-      const matchSearch = item.title
-        .toLowerCase()
-        .includes(search.toLowerCase());
+  const query = useMemo(() => {
+    const q = new URLSearchParams();
+    q.set("page", String(page));
+    q.set("limit", "10");
 
-      const matchCategory =
-        category === "ALL" || item.category === category;
+    if (search) q.set("search", search);
+    if (category !== "ALL") q.set("category", category);
+    if (status !== "ALL") q.set("status", status);
 
-      const matchStatus =
-        status === "ALL" || item.status === status;
+    return q.toString();
+  }, [page, search, category, status]);
 
-      return matchSearch && matchCategory && matchStatus;
-    });
-  }, [insights, search, category, status]);
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/insights?${query}`, { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        setItems(d.items || []);
+        setTotalPages(d.totalPages || 1);
+      })
+      .finally(() => setLoading(false));
+  }, [query]);
 
-  function handleDelete() {
+  async function handleDelete() {
     if (!deleteId) return;
-    setInsights((prev) =>
-      prev.filter((item) => item.id !== deleteId)
-    );
+
+    await fetch(`/api/insights/${deleteId}`, {
+      method: "DELETE",
+    });
+
     setDeleteId(null);
+    setItems((prev) => prev.filter((i) => i.id !== deleteId));
   }
 
   return (
@@ -85,7 +73,7 @@ export default function InsightsAdminPage() {
 
         <Link
           href="/admin/insights/new"
-          className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition"
+          className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
         >
           New Insight
         </Link>
@@ -96,14 +84,20 @@ export default function InsightsAdminPage() {
           type="text"
           placeholder="Search by title…"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-900/10"
+          onChange={(e) => {
+            setPage(1);
+            setSearch(e.target.value);
+          }}
+          className="rounded-md border px-3 py-2 text-sm"
         />
 
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value as any)}
-          className="rounded-md border border-gray-300 px-3 py-2 text-sm bg-white"
+          onChange={(e) => {
+            setPage(1);
+            setCategory(e.target.value as any);
+          }}
+          className="rounded-md border px-3 py-2 text-sm"
         >
           <option value="ALL">All Categories</option>
           <option value="PRESS_RELEASE">Press Release</option>
@@ -114,8 +108,11 @@ export default function InsightsAdminPage() {
 
         <select
           value={status}
-          onChange={(e) => setStatus(e.target.value as any)}
-          className="rounded-md border border-gray-300 px-3 py-2 text-sm bg-white"
+          onChange={(e) => {
+            setPage(1);
+            setStatus(e.target.value as any);
+          }}
+          className="rounded-md border px-3 py-2 text-sm"
         >
           <option value="ALL">All Status</option>
           <option value="DRAFT">Draft</option>
@@ -123,9 +120,9 @@ export default function InsightsAdminPage() {
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+      <div className="overflow-hidden rounded-lg border bg-white">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-gray-50 border-b">
             <tr>
               <th className="px-4 py-3 text-left">Title</th>
               <th className="px-4 py-3 text-left">Category</th>
@@ -136,65 +133,58 @@ export default function InsightsAdminPage() {
           </thead>
 
           <tbody>
-            {filteredInsights.map((item) => (
-              <tr
-                key={item.id}
-                className="border-b last:border-b-0 hover:bg-gray-50"
-              >
-                <td className="px-4 py-3">
-                  <div className="font-medium">
-                    {item.title}
-                  </div>
-                  <div className="text-xs text-gray-400">
-                    /insights/{item.slug}
-                  </div>
-                </td>
+            {!loading &&
+              items.map((item) => (
+                <tr key={item.id} className="border-b hover:bg-gray-50">
+                  <td className="px-4 py-3">
+                    <div className="font-medium">{item.title}</div>
+                    <div className="text-xs text-gray-400">
+                      /insights/{item.slug}
+                    </div>
+                  </td>
 
-                <td className="px-4 py-3">
-                  {item.category.replace("_", " ")}
-                </td>
+                  <td className="px-4 py-3">
+                    {item.category.replace("_", " ")}
+                  </td>
 
-                <td className="px-4 py-3">
-                  <span
-                    className={`text-xs font-medium ${
-                      item.status === "PUBLISHED"
-                        ? "text-green-700"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    {item.status}
-                  </span>
-                </td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`text-xs font-medium ${
+                        item.status === "PUBLISHED"
+                          ? "text-green-700"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+                  </td>
 
-                <td className="px-4 py-3">
-                  {new Date(item.publishedAt).toLocaleDateString()}
-                </td>
+                  <td className="px-4 py-3">
+                    {new Date(item.createdAt).toLocaleDateString()}
+                  </td>
 
-                <td className="px-4 py-3 text-right space-x-3">
-                  <Link
-                    href={`/admin/insights/${item.id}`}
-                    className="text-sm font-medium text-gray-900 hover:underline"
-                  >
-                    Edit
-                  </Link>
+                  <td className="px-4 py-3 text-right space-x-3">
+                    <Link
+                      href={`/admin/insights/${item.id}`}
+                      className="text-sm font-medium hover:underline"
+                    >
+                      Edit
+                    </Link>
 
-                  <button
-                    onClick={() => setDeleteId(item.id)}
-                    className="text-sm font-medium text-red-600 hover:underline"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+                    <button
+                      onClick={() => setDeleteId(item.id)}
+                      className="text-sm font-medium text-red-600 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
 
-            {filteredInsights.length === 0 && (
+            {!loading && items.length === 0 && (
               <tr>
-                <td
-                  colSpan={5}
-                  className="px-4 py-10 text-center text-gray-500"
-                >
-                  No insights match your filters.
+                <td colSpan={5} className="py-10 text-center text-gray-500">
+                  No insights found.
                 </td>
               </tr>
             )}
@@ -202,13 +192,26 @@ export default function InsightsAdminPage() {
         </table>
       </div>
 
+      <div className="flex justify-center gap-2 mt-8">
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            className={`px-3 py-1 rounded border text-sm ${
+              page === i + 1
+                ? "bg-gray-900 text-white"
+                : "hover:bg-gray-100"
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+
       {deleteId && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-            <h2 className="text-lg font-semibold">
-              Delete Insight
-            </h2>
-
+            <h2 className="text-lg font-semibold">Delete Insight</h2>
             <p className="mt-2 text-sm text-gray-600">
               Are you sure you want to delete this insight?
             </p>

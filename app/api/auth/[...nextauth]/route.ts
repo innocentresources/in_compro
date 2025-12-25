@@ -1,9 +1,7 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,50 +11,43 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
-        console.log("AUTHORIZE CALLED", credentials?.email);
-            
         if (!credentials?.email || !credentials?.password) {
-          console.log("MISSING CREDENTIALS");
           return null;
         }
-      
+
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-      
-        if (!user) {
-          console.log("USER NOT FOUND");
-          return null;
-        }
-      
+
+        if (!user) return null;
+
         const valid = await bcrypt.compare(
           credentials.password,
           user.passwordHash
         );
-      
-        console.log("PASSWORD VALID:", valid);
-      
-        if (!valid) {
-          return null;
-        }
-      
+
+        if (!valid) return null;
+
+        // ✅ id tetap STRING (ObjectId)
         return {
-          id: String(user.id),
+          id: user.id,
           email: user.email,
           role: user.role,
-        };
+        } as any;
       },
     }),
   ],
 
   session: {
-    strategy: "jwt" as const,
+    strategy: "jwt",
   },
 
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        token.id = (user as any).id;
         token.role = (user as any).role;
       }
       return token;
@@ -64,6 +55,7 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {
       if (session.user) {
+        session.user.id = token.id as string;
         session.user.role = token.role as string;
       }
       return session;
@@ -76,5 +68,4 @@ export const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
