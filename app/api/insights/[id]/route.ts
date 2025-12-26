@@ -1,39 +1,23 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
-import {
-  ensureUniqueSlug,
-  slugify,
-  isNumericIdLike,
-  type Category,
-  type Status,
-} from "@/lib/insightsApi";
+import { slugify, ensureUniqueSlug } from "@/lib/insightsApi";
 
 export const dynamic = "force-dynamic";
 
-function isAdmin(session: any) {
-  return session?.user?.role === "ADMIN";
-}
-
-/* ===================== GET ===================== */
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   const { id } = await context.params;
 
   const session = await getServerSession(authOptions);
-  const admin = isAdmin(session);
+  if (!session || session.user.role !== "ADMIN") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-  const where = isNumericIdLike(id)
-    ? { id }
-    : { slug: id };
-
-  const insight = await prisma.insight.findFirst({
-    where: admin ? where : { ...where, status: "PUBLISHED" },
-  });
-
+  const insight = await prisma.insight.findUnique({ where: { id } });
   if (!insight) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -41,66 +25,61 @@ export async function GET(
   return NextResponse.json(insight);
 }
 
-/* ===================== PUT ===================== */
 export async function PUT(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params;
+  try {
+    const { id } = await context.params;
 
-  const session = await getServerSession(authOptions);
-  if (!isAdmin(session)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-  const body = await req.json();
+    const body = await req.json();
 
-  const title = body.title?.trim();
-  const excerpt = body.excerpt?.trim();
-  const content = body.content?.trim();
-  const category = body.category as Category | undefined;
-  const status = body.status as Status | undefined;
+    const title = String(body.title || "").trim();
+    const excerpt = String(body.excerpt || "").trim();
+    const content = String(body.content || "").trim();
+    const category = body.category;
+    const status = body.status;
+    const coverImage = body.coverImage ?? null;
 
-  let slug: string | undefined;
+    if (!title || !content) {
+      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+    }
 
-  if (body.slug || title) {
-    slug = await ensureUniqueSlug({
-      desiredSlug: slugify(body.slug || title),
-      excludeId: id,
+    const existing = await prisma.insight.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    let slug = existing.slug;
+    if (existing.title !== title) {
+      const desiredSlug = slugify(title);
+      slug = await ensureUniqueSlug({ desiredSlug, excludeId: id });
+    }
+
+    const updated = await prisma.insight.update({
+      where: { id },
+      data: {
+        title,
+        slug,
+        excerpt,
+        content,
+        category,
+        status,
+        coverImage,
+      },
     });
+
+    return NextResponse.json(updated);
+  } catch (err: any) {
+    console.error("PUT /api/insights/[id] ERROR:", err);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
-
-  const updated = await prisma.insight.update({
-    where: isNumericIdLike(id) ? { id } : { slug: id },
-    data: {
-      ...(title && { title }),
-      ...(excerpt && { excerpt }),
-      ...(content && { content }),
-      ...(category && { category }),
-      ...(status && { status }),
-      ...(slug && { slug }),
-      ...(body.coverImage !== undefined && { coverImage: body.coverImage }),
-    },
-  });
-
-  return NextResponse.json(updated);
-}
-
-/* ===================== DELETE ===================== */
-export async function DELETE(
-  req: NextRequest,
-  context: { params: Promise<{ id: string }> }
-) {
-  const { id } = await context.params;
-
-  const session = await getServerSession(authOptions);
-  if (!isAdmin(session)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  await prisma.insight.delete({
-    where: isNumericIdLike(id) ? { id } : { slug: id },
-  });
-
-  return NextResponse.json({ ok: true });
 }

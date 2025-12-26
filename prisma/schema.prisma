@@ -15,8 +15,6 @@ model User {
   role         Role      @default(ADMIN)
   insights     Insight[] @relation("UserInsights")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Insight {

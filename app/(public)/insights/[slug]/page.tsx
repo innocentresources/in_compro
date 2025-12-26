@@ -1,63 +1,72 @@
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+type Params = Promise<{ slug: string }>;
+
+export async function generateMetadata(
+  { params }: { params: Params }
+): Promise<Metadata> {
+  const { slug } = await params;
+
   const insight = await prisma.insight.findFirst({
     where: {
-      slug: params.slug,
+      slug,
       status: "PUBLISHED",
     },
     select: {
       title: true,
       excerpt: true,
-      coverImage: true,
     },
   });
 
-  if (!insight) return {};
+  if (!insight) {
+    return { title: "Insight Not Found" };
+  }
 
   return {
     title: insight.title,
-    description: insight.excerpt,
-    openGraph: {
-      title: insight.title,
-      description: insight.excerpt,
-      images: insight.coverImage
-        ? [
-            {
-              url: insight.coverImage,
-              width: 1200,
-              height: 630,
-            },
-          ]
-        : [],
-    },
+    description: insight.excerpt || insight.title,
   };
 }
 
-export default async function InsightDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function InsightDetailPage(
+  { params }: { params: Params }
+) {
+  const { slug } = await params;
+
   const insight = await prisma.insight.findFirst({
     where: {
-      slug: params.slug,
+      slug,
       status: "PUBLISHED",
     },
   });
 
-  if (!insight) notFound();
+  if (!insight) {
+    notFound();
+  }
 
   return (
-    <article className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-semibold">{insight.title}</h1>
-      <p className="mt-4 text-gray-600">{insight.excerpt}</p>
+    <article className="mx-auto max-w-3xl px-4 py-16">
+      <h1 className="text-4xl font-bold mb-4">
+        {insight.title}
+      </h1>
+
+      {insight.coverImage && (
+        <img
+          src={insight.coverImage}
+          alt={insight.title}
+          className="mb-8 rounded-lg"
+        />
+      )}
+
+      <div className="text-gray-500 mb-6">
+        {new Date(insight.createdAt).toLocaleDateString()}
+      </div>
+
+      <div className="prose prose-lg max-w-none">
+        {insight.content}
+      </div>
     </article>
   );
 }
