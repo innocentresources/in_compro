@@ -83,3 +83,42 @@ export async function PUT(
     );
   }
 }
+
+import { del } from "@vercel/blob";
+
+export async function DELETE(
+  _req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await context.params;
+
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const insight = await prisma.insight.findUnique({ where: { id } });
+    if (!insight) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    if (insight.coverImage) {
+      try {
+        await del(insight.coverImage);
+      } catch (blobError) {
+        console.warn("Failed to delete blob:", blobError);
+      }
+    }
+
+    await prisma.insight.delete({ where: { id } });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("DELETE /api/insights/[id] ERROR:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

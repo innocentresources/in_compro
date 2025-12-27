@@ -27,6 +27,30 @@ export default function InsightsAdminPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleDelete = async (id: string) => {
+    const confirmed = confirm(
+      "Are you sure you want to permanently delete this insight?"
+    );
+    if (!confirmed) return;
+
+    try {
+      const res = await fetch(`/api/insights/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Delete failed");
+      }
+
+      // Optimistic UI update
+      setInsights((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete insight");
+    }
+  };
+
   return (
     <main className="max-w-6xl mx-auto px-6 py-10">
       <header className="flex items-center justify-between mb-6">
@@ -68,7 +92,10 @@ export default function InsightsAdminPage() {
 
             {!loading && insights.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-10 text-center text-gray-500">
+                <td
+                  colSpan={5}
+                  className="px-4 py-10 text-center text-gray-500"
+                >
                   No insights found.
                 </td>
               </tr>
@@ -113,6 +140,13 @@ export default function InsightsAdminPage() {
                   >
                     Edit
                   </Link>
+
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="text-sm font-medium text-red-600 hover:underline"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
