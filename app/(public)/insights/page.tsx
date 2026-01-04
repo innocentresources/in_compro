@@ -5,6 +5,8 @@ import { Prisma, InsightCategory } from "@prisma/client";
 import { Suspense } from "react";
 import InsightsFilter from "./InsightsFilter";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Insights & News",
   description:
@@ -16,13 +18,14 @@ const PAGE_SIZE = 6;
 export default async function InsightsPage({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
     q?: string;
     category?: string;
-  };
+  }>;
 }) {
-  const { page, q, category } = searchParams;
+  const { page, q, category } = await searchParams;
+
   const currentPage = Math.max(Number(page) || 1, 1);
 
   const where: Prisma.InsightWhereInput = {
@@ -71,7 +74,6 @@ export default async function InsightsPage({
         <InsightsFilter />
       </Suspense>
 
-      {/* LIST */}
       {insights.length === 0 ? (
         <p className="mt-10 text-gray-500">No insights found.</p>
       ) : (
@@ -90,24 +92,20 @@ export default async function InsightsPage({
               )}
 
               <div className="p-5">
-                {/* CATEGORY */}
                 <p className="mb-1 text-xs font-semibold uppercase text-red-600">
                   {item.category.replace("_", " ")}
                 </p>
 
-                {/* TITLE */}
                 <h2 className="text-xl font-semibold mb-2">
                   <Link href={`/insights/${item.slug}`}>
                     {item.title}
                   </Link>
                 </h2>
 
-                {/* DATE */}
                 <p className="text-sm text-gray-600 mb-4">
                   {new Date(item.createdAt).toLocaleDateString()}
                 </p>
 
-                {/* EXCERPT */}
                 <p className="text-gray-700 line-clamp-3">
                   {item.excerpt}
                 </p>
@@ -117,7 +115,6 @@ export default async function InsightsPage({
         </div>
       )}
 
-      {/* PAGINATION */}
       {totalPages > 1 && (
         <div className="flex justify-center gap-2 mt-12 flex-wrap">
           {Array.from({ length: totalPages }).map((_, i) => {
