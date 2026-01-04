@@ -60,12 +60,18 @@ export default async function InsightDetailPage(
         />
       )}
 
-      <div className="text-gray-500 mb-6">
+      <div className="text-gray-500 mb-8">
         {new Date(insight.createdAt).toLocaleDateString()}
       </div>
 
       <div className="prose prose-lg max-w-none">
-        {insight.content}
+        {insight.content
+          .split(/\n\s*\n/)
+          .map((paragraph, i) => (
+            <p key={i} className="mb-6 leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
       </div>
     </article>
   );
