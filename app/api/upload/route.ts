@@ -13,6 +13,7 @@ function isAdmin(session: any) {
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
+
   if (!isAdmin(session)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -20,7 +21,7 @@ export async function POST(req: NextRequest) {
   const form = await req.formData();
   const file = form.get("file");
 
-  if (!file || !(file instanceof File)) {
+  if (!(file instanceof File)) {
     return NextResponse.json({ error: "Missing file" }, { status: 400 });
   }
 
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
 
   const allowed = ["image/jpeg", "image/png", "image/webp"];
   if (!allowed.includes(file.type)) {
-    return NextResponse.json({ error: "Only JPG/PNG/WEBP allowed" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
   }
 
   const ext =
@@ -41,13 +42,22 @@ export async function POST(req: NextRequest) {
       ? "webp"
       : "jpg";
 
-  const baseName = slugify(file.name.replace(/\.[^/.]+$/, "")) || "cover";
-  const path = `insights/${baseName}.${ext}`;
+  const baseName =
+    slugify(file.name.replace(/\.[^/.]+$/, "")) || crypto.randomUUID();
 
-  const blob = await put(path, file, {
-    access: "public",
-    addRandomSuffix: true,
-  });
+  const blob = await put(
+    `insights/${baseName}.${ext}`,
+    file,
+    {
+      access: "public",
+      addRandomSuffix: true,
+    }
+  );
 
-  return NextResponse.json({ url: blob.url }, { status: 201 });
+  return NextResponse.json(
+    {
+      url: blob.url,
+    },
+    { status: 201 }
+  );
 }
