@@ -8,4 +8,5 @@ export type Insight = {
   status: "DRAFT" | "PUBLISHED";
   publishedAt: string;
   image?: string;
+  imageCredit?: string;
 };

@@ -1,213 +1,101 @@
-"use client";
+import Link from "next/link";
+import type { Metadata } from "next";
+import Photo, { photos } from "@/components/Photo";
 
-import Image from "next/image";
-import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+export const metadata: Metadata = {
+  title: "Sustainability",
+  description:
+    "How Innocent Resources intends to approach environmental, social and governance responsibilities.",
+};
+
+const pillars = [
+  {
+    title: "Environment",
+    text: "The company aims to limit environmental disturbance, rehabilitate land progressively as work advances, and manage land and water carefully at every stage of a project.",
+  },
+  {
+    title: "Community",
+    text: "The company aims to support host communities through employment, skills development and local participation, and to engage with them openly.",
+  },
+  {
+    title: "Governance & safety",
+    text: "The company works to operate within applicable laws and permit conditions, to conduct its business ethically, and to keep people safe on and around its sites.",
+  },
+];
 
 export default function SustainabilityPage() {
-  useRevealOnScroll(".reveal");
-
   return (
     <>
-      {/* Page Header */}
-      <section className="section gray">
-        <div className="container">
-          <span className="section-kicker">Sustainability</span>
-          <h1 className="section-title">
-            Responsible & Sustainable Operations
-          </h1>
-          <p className="section-subtitle">
-            Our sustainability framework integrates environmental stewardship,
-            social responsibility, and disciplined governance across all
-            operations and development activities.
+      <section className="page-hero">
+        <div className="wrap">
+          <span className="eyebrow light">Sustainability</span>
+          <h1 className="display">Responsible from the first field visit.</h1>
+          <p className="lede">
+            Environmental, social and governance considerations are part of how
+            the company plans its work, from early exploration onwards.
           </p>
         </div>
       </section>
 
-      {/* Image Divider 1 */}
-      <section>
-          <div className="full-bleed-image reveal">
-            <Image
-              src="/sustainability01.jpg"
-              alt="Mining operations integrated with surrounding environment"
-              fill
-              sizes="100vw"
-              priority
-            />
-          </div>
-        </section>
-
-
-      {/* Sustainability Overview */}
-      <section className="section gray">
-        <div className="container">
-          <h2 className="section-title reveal">Sustainability Overview</h2>
-
-          <p className="section-subtitle reveal delay-1">
-            Innocent Resources Corporation Limited is committed to minimizing
-            environmental impact, supporting host communities, and maintaining
-            transparent governance throughout the lifecycle of our mining and
-            mineral development projects.
-          </p>
-
-          <p className="reveal delay-2" style={{ color: "var(--text-muted)" }}>
-            Sustainability considerations are embedded into project planning,
-            operational decision-making, and long-term strategy to ensure
-            responsible resource development aligned with international
-            expectations.
-          </p>
-        </div>
-      </section>
-
-      {/* ESG Commitments */}
       <section className="section">
-        <div className="container">
-          <h2 className="section-title reveal">ESG Commitments</h2>
-
-          <div className="focus-grid">
-            <div className="focus-item reveal delay-1">
-              <h3 className="focus-title">Environmental</h3>
-              <p className="focus-text">
-                Minimized ecological disturbance, progressive rehabilitation,
-                responsible water and land management, and reduced carbon
-                intensity across operations.
+        <div className="wrap split">
+          <div className="reveal">
+            <span className="eyebrow">Our intent</span>
+            <h2 className="h2">What we aim to do.</h2>
+            <div className="prose">
+              <p>
+                The statements on this page describe the company&apos;s aims and
+                the way it intends to work. They are commitments of intent, not
+                measured results.
               </p>
-            </div>
-
-            <div className="focus-item reveal delay-2">
-              <h3 className="focus-title">Social</h3>
-              <p className="focus-text">
-                Respect for local communities, responsible employment practices,
-                transparent engagement, and contribution to local economic
-                development.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-3">
-              <h3 className="focus-title">Governance</h3>
-              <p className="focus-text">
-                Disciplined governance structures ensuring accountability,
-                regulatory compliance, ethical conduct, and operational
-                traceability.
+              <p>
+                Mining and exploration change land. Our aim is to keep that
+                change as small as practical, to leave land in better order than
+                we found it, and to share the benefits of our work with the
+                communities close to it.
               </p>
             </div>
           </div>
+          <Photo photo={photos.kalahari} className="reveal" />
         </div>
       </section>
 
-      {/* Environmental Stewardship */}
-      <section className="section gray">
-        <div className="container">
-          <h2 className="section-title reveal">Environmental Stewardship</h2>
-
-          <div className="focus-grid">
-            <div className="focus-item reveal delay-1">
-              <h3 className="focus-title">Impact Management</h3>
-              <p className="focus-text">
-                Identification, monitoring, and mitigation of environmental
-                impacts throughout the project lifecycle.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-2">
-              <h3 className="focus-title">Rehabilitation</h3>
-              <p className="focus-text">
-                Progressive rehabilitation practices aimed at restoring land
-                and ecosystems post-mining.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-3">
-              <h3 className="focus-title">Resource Efficiency</h3>
-              <p className="focus-text">
-                Efficient use of energy, water, and materials to reduce waste
-                and environmental footprint.
-              </p>
-            </div>
+      <section className="section paper">
+        <div className="wrap">
+          <div className="reveal">
+            <span className="eyebrow">Three areas</span>
+            <h2 className="h2">Environment, community, governance.</h2>
           </div>
-        </div>
-      </section>
-
-      <section>
-      <div className="full-bleed-image reveal">
-        <Image
-          src="/sustainability02.jpg"
-          alt="Mining operations integrated with surrounding environment"
-          fill
-          sizes="100vw"
-          priority
-        />
-      </div>
-    </section>
-
-
-      {/* Community Engagement */}
-      <section className="section gray">
-        <div className="container">
-          <h2 className="section-title reveal">Community Engagement</h2>
-
-          <p className="section-subtitle reveal delay-1">
-            Our operations are guided by established community-relations
-            frameworks that prioritize transparency, respect, and long-term
-            partnership.
+          <div className="grid cols-3 reveal">
+            {pillars.map((p, i) => (
+              <div className="cell" key={p.title}>
+                <span className="num">0{i + 1}</span>
+                <h3 className="h3">{p.title}</h3>
+                <p>{p.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="notice reveal" style={{ marginTop: 24 }}>
+            <strong>Reporting.</strong> This website does not yet publish
+            sustainability metrics, audits or certifications. Any such
+            information will be added only once it can be verified.
           </p>
-
-          <div className="focus-grid">
-            <div className="focus-item reveal delay-1">
-              <h3 className="focus-title">Local Employment</h3>
-              <p className="focus-text">
-                Responsible employment structures that prioritize local hiring
-                and skills development.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-2">
-              <h3 className="focus-title">Community Development</h3>
-              <p className="focus-text">
-                Participation in initiatives that support social and economic
-                development within host communities.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-3">
-              <h3 className="focus-title">Cultural & Environmental Respect</h3>
-              <p className="focus-text">
-                Respect for cultural heritage, land use practices, and local
-                environmental considerations.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Governance & Safety */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title reveal">Governance & Safety</h2>
-
-          <div className="focus-grid">
-            <div className="focus-item reveal delay-1">
-              <h3 className="focus-title">Regulatory Compliance</h3>
-              <p className="focus-text">
-                Full compliance with applicable laws, permits, and regulatory
-                requirements across all jurisdictions.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-2">
-              <h3 className="focus-title">Ethical Supply Chains</h3>
-              <p className="focus-text">
-                Responsible procurement and supply chain practices aligned
-                with ethical sourcing expectations.
-              </p>
-            </div>
-
-            <div className="focus-item reveal delay-3">
-              <h3 className="focus-title">Safety Standards</h3>
-              <p className="focus-text">
-                Non-negotiable safety standards designed to protect workers,
-                contractors, and surrounding communities.
-              </p>
-            </div>
+      <section className="section dark on-dark">
+        <div className="wrap split wide-left">
+          <div className="reveal">
+            <span className="eyebrow light">Site safety</span>
+            <h2 className="h2">Concerns about safety at a site?</h2>
+            <p className="lede">
+              Use the emergency and site safety hotline on the contact page.
+            </p>
+          </div>
+          <div className="reveal">
+            <Link href="/contact" className="btn">
+              Contact details
+            </Link>
           </div>
         </div>
       </section>

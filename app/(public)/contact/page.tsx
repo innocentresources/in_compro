@@ -1,97 +1,100 @@
-"use client";
+import type { Metadata } from "next";
+import { contact } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Contact details and enquiry form for Innocent Resources.",
+};
 
 export default function ContactPage() {
   return (
-    <main>
-      {/* Section */}
-      <section className="section">
-        <div className="container">
-          {/* Header */}
-          <span className="section-kicker">Contact</span>
-          <h1 className="section-title">Get in Touch</h1>
-          <p className="section-subtitle">
-            Have a question, project idea, or collaboration in mind?  
-            Fill out the form below and we’ll get back to you shortly.
+    <>
+      <section className="page-hero">
+        <div className="wrap">
+          <span className="eyebrow light">Contact</span>
+          <h1 className="display">Get in touch.</h1>
+          <p className="lede">
+            For general enquiries, partnerships or operational matters, write
+            to the head office or use the form below.
           </p>
-
-          {/* Form Wrapper */}
-          <div style={{ maxWidth: "640px", marginTop: "48px" }}>
-            <form
-              action="https://api.web3forms.com/submit"
-              method="POST"
-              className="card"
-            >
-              {/* REQUIRED: Web3Forms access key */}
-              <input
-                type="hidden"
-                name="access_key"
-                value="c33b4d90-0349-42b1-9309-4c41d7ef5def"
-              />
-
-              <input
-                type="hidden"
-                name="subject"
-                value="New Contact Message"
-              />
-              <input type="hidden" name="from_name" value="Website Contact" />
-
-              {/* Name */}
-              <div style={{ marginBottom: "16px" }}>
-                <label className="footer-text">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Your name"
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Email */}
-              <div style={{ marginBottom: "16px" }}>
-                <label className="footer-text">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="your@email.com"
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Message */}
-              <div style={{ marginBottom: "24px" }}>
-                <label className="footer-text">Message</label>
-                <textarea
-                  name="message"
-                  required
-                  placeholder="Write your message here..."
-                  rows={5}
-                  style={{
-                    ...inputStyle,
-                    resize: "vertical",
-                  }}
-                />
-              </div>
-
-              {/* Button */}
-              <button type="submit" className="btn">
-                Send Message
-              </button>
-            </form>
-          </div>
         </div>
       </section>
-    </main>
+
+      <section className="section">
+        <div className="wrap contact-grid">
+          <div className="reveal">
+            <span className="eyebrow">Head office</span>
+            <dl className="contact-list">
+              <div>
+                <dt>Address</dt>
+                <dd>{contact.address}</dd>
+              </div>
+              <div>
+                <dt>General enquiries</dt>
+                <dd>
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                </dd>
+              </div>
+              <div>
+                <dt>Emergency &amp; site safety hotline</dt>
+                <dd>
+                  <a href={`tel:${contact.hotlineTel}`}>{contact.hotline}</a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <form
+            className="form reveal"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="access_key"
+              value="c33b4d90-0349-42b1-9309-4c41d7ef5def"
+            />
+            <input type="hidden" name="subject" value="New website enquiry" />
+            <input type="hidden" name="from_name" value="Website contact form" />
+            <input
+              type="checkbox"
+              name="botcheck"
+              className="hp"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+            />
+
+            <label>
+              Name
+              <input
+                className="field"
+                type="text"
+                name="name"
+                required
+                autoComplete="name"
+              />
+            </label>
+            <label>
+              Email
+              <input
+                className="field"
+                type="email"
+                name="email"
+                required
+                autoComplete="email"
+              />
+            </label>
+            <label>
+              Message
+              <textarea className="field" name="message" required />
+            </label>
+            <button type="submit" className="btn">
+              Send message
+            </button>
+          </form>
+        </div>
+      </section>
+    </>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "12px 14px",
-  fontSize: "14px",
-  borderRadius: "4px",
-  border: "1px solid #ddd",
-  outline: "none",
-  marginTop: "6px",
-};

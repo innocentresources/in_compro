@@ -1,5 +1,6 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import RevealInit from "@/components/RevealInit";
 
 export default function PublicLayout({
   children,
@@ -8,9 +9,10 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      <Navbar />
+      <SiteHeader />
       <main>{children}</main>
-      <Footer />
+      <SiteFooter />
+      <RevealInit />
     </>
   );
 }
