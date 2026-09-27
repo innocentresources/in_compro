@@ -2,47 +2,37 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-
-const CATEGORIES = [
-  { value: "", label: "All Categories" },
-  { value: "PRESS_RELEASE", label: "Press Release" },
-  { value: "BLOG", label: "Blog" },
-  { value: "NEWS", label: "News" },
-  { value: "UPDATE", label: "Update" },
-];
+import { CATEGORIES } from "@/lib/getInsights";
 
 export default function InsightsFilter() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const sp = useSearchParams();
+  const [q, setQ] = useState(sp.get("q") || "");
+  const [category, setCategory] = useState(sp.get("category") || "");
 
-  const [query, setQuery] = useState(searchParams.get("q") || "");
-  const [category, setCategory] = useState(
-    searchParams.get("category") || ""
-  );
-
-  const applyFilters = () => {
+  function apply(e: React.FormEvent) {
+    e.preventDefault();
     const params = new URLSearchParams();
-
-    if (query) params.set("q", query);
+    if (q) params.set("q", q);
     if (category) params.set("category", category);
-
-    router.push(`/insights?${params.toString()}`);
-  };
+    router.push(`/insights${params.size ? `?${params}` : ""}`);
+  }
 
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:items-center">
+    <form className="filters" onSubmit={apply} role="search">
       <input
-        type="text"
-        placeholder="Search insights..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        className="w-full md:w-1/2 rounded border px-4 py-2"
+        className="field grow"
+        type="search"
+        placeholder="Search insights"
+        aria-label="Search insights"
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
       />
-
       <select
+        className="field"
+        aria-label="Category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="w-full md:w-56 rounded border px-4 py-2"
       >
         {CATEGORIES.map((c) => (
           <option key={c.value} value={c.value}>
@@ -50,13 +40,9 @@ export default function InsightsFilter() {
           </option>
         ))}
       </select>
-
-      <button
-        onClick={applyFilters}
-        className="rounded bg-black px-6 py-2 text-white hover:bg-gray-800"
-      >
+      <button className="btn outline" type="submit">
         Filter
       </button>
-    </div>
+    </form>
   );
 }

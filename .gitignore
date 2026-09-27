@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 /app/generated/prisma
+
+# local machine tooling / Claude Code local state (not part of the app)
+.tools/
+.claude/settings.local.json
+start.log
