@@ -54,10 +54,6 @@ export default function SiteFooter() {
             © {new Date().getFullYear()} Innocent Resources Corporation Limited.
             All rights reserved.
           </span>
-          <span>
-            Statements about exploration and development are plans, not
-            confirmed results.
-          </span>
         </div>
       </div>
     </footer>

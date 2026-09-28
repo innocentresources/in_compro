@@ -57,20 +57,6 @@ export default function ProjectsPage() {
                       </span>
                     ))}
                   </div>
-                  <dl className="meta-list">
-                    <div>
-                      <dt>Confirmed resource</dt>
-                      <dd>Not published</dd>
-                    </div>
-                    <div>
-                      <dt>Exploration results</dt>
-                      <dd>Not published</dd>
-                    </div>
-                    <div>
-                      <dt>Production</dt>
-                      <dd>Not published</dd>
-                    </div>
-                  </dl>
                 </div>
               </article>
             ))}
@@ -107,12 +93,6 @@ export default function ProjectsPage() {
               </ul>
             </div>
           </div>
-          <p className="notice reveal" style={{ marginTop: 24 }}>
-            <strong>Forward-looking statements.</strong> References to
-            exploration, development, potential production or future
-            operations describe intentions and plans. They are not
-            confirmed results, and outcomes may differ materially.
-          </p>
         </div>
       </section>
 
