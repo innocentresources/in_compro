@@ -93,12 +93,6 @@ export default function ProjectsPage() {
               </ul>
             </div>
           </div>
-          <p className="notice reveal" style={{ marginTop: 24 }}>
-            <strong>Forward-looking statements.</strong> References to
-            exploration, development, potential production or future
-            operations describe intentions and plans. They are not
-            confirmed results, and outcomes may differ materially.
-          </p>
         </div>
       </section>
 
