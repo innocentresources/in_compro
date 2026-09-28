@@ -57,20 +57,6 @@ export default function ProjectsPage() {
                       </span>
                     ))}
                   </div>
-                  <dl className="meta-list">
-                    <div>
-                      <dt>Confirmed resource</dt>
-                      <dd>Not published</dd>
-                    </div>
-                    <div>
-                      <dt>Exploration results</dt>
-                      <dd>Not published</dd>
-                    </div>
-                    <div>
-                      <dt>Production</dt>
-                      <dd>Not published</dd>
-                    </div>
-                  </dl>
                 </div>
               </article>
             ))}
