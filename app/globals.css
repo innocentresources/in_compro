@@ -244,7 +244,7 @@ img {
   gap: 14px;
 }
 .brand img {
-  width: 46px;
+  width: auto;
   height: 46px;
 }
 .brand-text {
@@ -980,10 +980,10 @@ img {
 }
 
 /* Logo artwork is a dark line mark; show it white on the dark header/footer. */
-.brand img {
-  filter: brightness(0) invert(1);
-  width: 54px;
-  height: 54px;
+.footer-logo {
+  width: min(260px, 100%);
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .page-hero .lede {
