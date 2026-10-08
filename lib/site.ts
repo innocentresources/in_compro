@@ -42,6 +42,11 @@ export const jurisdictions: Jurisdiction[] = [
   },
 ];
 
+/** Canonical origin for sitemap, robots and share links. */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.innocentresources.com"
+).replace(/[/]$/, "");
+
 export const contact = {
   address: "101 Katherine Street, Sandton, South Africa",
   email: "Info@InnocentResources.com",

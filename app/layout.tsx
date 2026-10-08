@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, Inter } from "next/font/google";
 import "./globals.css";
+import { contact, siteUrl } from "@/lib/site";
 
 const serif = Newsreader({
   subsets: ["latin"],
@@ -15,9 +16,7 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://innocentresources.com"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Innocent Resources Corporation Limited",
     template: "%s | Innocent Resources",
@@ -32,10 +31,10 @@ export const metadata: Metadata = {
       "Responsible mineral development across Namibia, Botswana and South Africa.",
     images: [
       {
-        url: "/img/hero-spitzkoppe.jpg",
+        url: "/img/og.jpg",
         width: 1200,
-        height: 675,
-        alt: "Granite peaks at Spitzkoppe, Namibia, at dusk",
+        height: 630,
+        alt: "Innocent Resources",
       },
     ],
   },
@@ -44,9 +43,24 @@ export const metadata: Metadata = {
     title: "Innocent Resources Corporation Limited",
     description:
       "Responsible mineral development across Namibia, Botswana and South Africa.",
-    images: ["/img/hero-spitzkoppe.jpg"],
+    images: ["/img/og.jpg"],
   },
   robots: { index: true, follow: true },
+};
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Innocent Resources Corporation Limited",
+  url: siteUrl,
+  logo: `${siteUrl}/logo-black.svg`,
+  email: contact.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "101 Katherine Street",
+    addressLocality: "Sandton",
+    addressCountry: "ZA",
+  },
 };
 
 export default function RootLayout({
@@ -56,7 +70,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" style={{ colorScheme: "only light" }} className={`${serif.variable} ${sans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
