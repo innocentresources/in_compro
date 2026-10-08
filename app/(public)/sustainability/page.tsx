@@ -26,7 +26,7 @@ const pillars = [
 export default function SustainabilityPage() {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero photo-hero hero-sustainability">
         <div className="wrap">
           <span className="eyebrow light">Sustainability</span>
           <h1 className="display">Responsible from the first field visit.</h1>
@@ -44,11 +44,6 @@ export default function SustainabilityPage() {
             <h2 className="h2">What we aim to do.</h2>
             <div className="prose">
               <p>
-                The statements on this page describe the company&apos;s aims and
-                the way it intends to work. They are commitments of intent, not
-                measured results.
-              </p>
-              <p>
                 Mining and exploration change land. Our aim is to keep that
                 change as small as practical, to leave land in better order than
                 we found it, and to share the benefits of our work with the
@@ -56,7 +51,7 @@ export default function SustainabilityPage() {
               </p>
             </div>
           </div>
-          <Photo photo={photos.kalahari} className="reveal" />
+          <Photo photo={photos.terrain} className="reveal" />
         </div>
       </section>
 

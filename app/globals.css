@@ -4,21 +4,21 @@
 
 /* ------------------------------------------------------------------
    Innocent Resources — corporate design system
-   Ink + ivory + brass. Serif display, sans body.
+   Near-black + white + grays. Serif display, sans body.
 ------------------------------------------------------------------- */
 :root {
   color-scheme: only light;
-  --ink: #0d1a1f;
-  --ink-2: #14262d;
-  --ink-3: #1d353e;
-  --ivory: #f6f3ec;
+  --ink: #111111;
+  --ink-2: #1b1b1b;
+  --ink-3: #272727;
+  --ivory: #f4f4f4;
   --paper: #ffffff;
-  --stone: #e6e1d5;
-  --brass: #a98a4d;
-  --brass-dark: #7d642f;
-  --text: #1a2529;
-  --muted: #5b676b;
-  --line: rgba(13, 26, 31, 0.14);
+  --stone: #e4e4e4;
+  --brass: #767676;
+  --brass-dark: #555555;
+  --text: #1a1a1a;
+  --muted: #5f5f5f;
+  --line: rgba(17, 17, 17, 0.14);
   --line-light: rgba(255, 255, 255, 0.16);
   --serif: var(--font-serif), Georgia, "Times New Roman", serif;
   --sans: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -79,7 +79,7 @@ img {
 }
 .on-dark .eyebrow,
 .eyebrow.light {
-  color: #cdb27a;
+  color: #bdbdbd;
 }
 
 .display {
@@ -167,7 +167,7 @@ img {
   font-size: 12px;
   letter-spacing: 0.04em;
   color: #fff;
-  background: rgba(13, 26, 31, 0.78);
+  background: rgba(17, 17, 17, 0.78);
 }
 
 /* ---------- Buttons ---------- */
@@ -187,8 +187,8 @@ img {
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 .btn:hover {
-  background: #bd9d5f;
-  border-color: #bd9d5f;
+  background: #d9d9d9;
+  border-color: #d9d9d9;
 }
 .btn.ghost {
   background: transparent;
@@ -226,7 +226,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(13, 26, 31, 0.96);
+  background: rgba(17, 17, 17, 0.96);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line-light);
   color: #fff;
@@ -244,7 +244,7 @@ img {
   gap: 14px;
 }
 .brand img {
-  width: 46px;
+  width: auto;
   height: 46px;
 }
 .brand-text {
@@ -262,7 +262,7 @@ img {
   font-size: 10px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: #cdb27a;
+  color: #bdbdbd;
   margin-top: 4px;
 }
 .nav {
@@ -379,11 +379,11 @@ img {
   inset: 0;
   background: linear-gradient(
       180deg,
-      rgba(13, 26, 31, 0.55) 0%,
-      rgba(13, 26, 31, 0.35) 40%,
-      rgba(13, 26, 31, 0.92) 100%
+      rgba(17, 17, 17, 0.55) 0%,
+      rgba(17, 17, 17, 0.35) 40%,
+      rgba(17, 17, 17, 0.92) 100%
     ),
-    linear-gradient(90deg, rgba(13, 26, 31, 0.7), transparent 70%);
+    linear-gradient(90deg, rgba(17, 17, 17, 0.7), transparent 70%);
 }
 .hero .wrap {
   position: relative;
@@ -416,7 +416,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 22px), radial-gradient(ellipse at 80% 20%, rgba(176,141,60,0.22), transparent 60%);
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 22px), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.07), transparent 60%);
 }
 .page-hero .wrap {
   position: relative;
@@ -445,7 +445,7 @@ img {
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(1.7rem, 3vw, 2.4rem);
-  color: #e0c88f;
+  color: #d4d4d4;
   line-height: 1.1;
 }
 .fact span {
@@ -508,7 +508,7 @@ img {
 }
 .cell:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(13, 26, 31, 0.08);
+  box-shadow: 0 16px 32px rgba(17, 17, 17, 0.08);
 }
 .on-dark .cell:hover {
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
@@ -552,7 +552,7 @@ img {
 .juris:hover {
   transform: translateY(-4px);
   border-color: var(--brass);
-  box-shadow: 0 16px 32px rgba(13, 26, 31, 0.1);
+  box-shadow: 0 16px 32px rgba(17, 17, 17, 0.1);
 }
 .juris-head {
   padding: 32px 32px 24px;
@@ -602,16 +602,16 @@ img {
   background: currentColor;
 }
 .stage.plan {
-  color: #7d642f;
-  background: #f1e8d3;
+  color: #555555;
+  background: #ececec;
 }
 .stage.ops {
-  color: #1d4f45;
-  background: #dcebe6;
+  color: #333333;
+  background: #e4e4e4;
 }
 .stage.asset {
-  color: #38505a;
-  background: #e2eaee;
+  color: #444444;
+  background: #e9e9e9;
 }
 .meta-list {
   margin-top: 20px;
@@ -742,7 +742,7 @@ img {
 .post:hover {
   transform: translateY(-4px);
   border-color: var(--brass);
-  box-shadow: 0 16px 32px rgba(13, 26, 31, 0.1);
+  box-shadow: 0 16px 32px rgba(17, 17, 17, 0.1);
 }
 .post .thumb {
   aspect-ratio: 16 / 10;
@@ -921,7 +921,7 @@ img {
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #cdb27a;
+  color: #bdbdbd;
   margin-bottom: 18px;
   font-weight: 600;
 }
@@ -980,10 +980,10 @@ img {
 }
 
 /* Logo artwork is a dark line mark; show it white on the dark header/footer. */
-.brand img {
-  filter: brightness(0) invert(1);
-  width: 54px;
-  height: 54px;
+.footer-logo {
+  width: min(260px, 100%);
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .page-hero .lede {
@@ -1007,12 +1007,12 @@ img {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #e0c88f;
-  border: 1px dashed rgba(224, 200, 143, 0.7);
+  color: #d4d4d4;
+  border: 1px dashed rgba(212, 212, 212, 0.7);
 }
 .page-hero.photo-hero::before {
   background:
-    linear-gradient(180deg, rgba(13, 26, 31, 0.6) 0%, rgba(13, 26, 31, 0.82) 100%),
+    linear-gradient(180deg, rgba(17, 17, 17, 0.6) 0%, rgba(17, 17, 17, 0.82) 100%),
     var(--hero-img) center/cover;
   opacity: 1;
 }
@@ -1077,9 +1077,9 @@ img {
   inset: 0;
   background: linear-gradient(
     0deg,
-    rgba(13, 26, 31, 0.88) 0%,
-    rgba(13, 26, 31, 0.15) 45%,
-    rgba(13, 26, 31, 0.15) 100%
+    rgba(17, 17, 17, 0.88) 0%,
+    rgba(17, 17, 17, 0.15) 45%,
+    rgba(17, 17, 17, 0.15) 100%
   );
 }
 .photo-band-copy {
@@ -1099,4 +1099,73 @@ img {
   line-height: 1.3;
   color: #fff;
   text-align: center;
+}
+
+/* ---------- Page header photos ---------- */
+.hero-projects {
+  --hero-img: url(/img/hdr-projects.jpg);
+}
+.hero-sustainability {
+  --hero-img: url(/img/hdr-sustainability.jpg);
+}
+.hero-careers {
+  --hero-img: url(/img/hdr-careers.jpg);
+}
+.hero-insights {
+  --hero-img: url(/img/hdr-insights.jpg);
+}
+
+/* ---------- Monochrome buttons ---------- */
+.btn {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.btn:hover {
+  background: #333333;
+  border-color: #333333;
+}
+.hero .btn,
+.page-hero .btn,
+.on-dark .btn,
+.site-header .btn,
+.mobile-nav .btn,
+.site-footer .btn {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+.hero .btn:hover,
+.page-hero .btn:hover,
+.on-dark .btn:hover,
+.site-header .btn:hover,
+.mobile-nav .btn:hover,
+.site-footer .btn:hover {
+  background: #e2e2e2;
+  border-color: #e2e2e2;
+}
+.btn.ghost,
+.btn.outline {
+  background: transparent;
+}
+.hero .btn.ghost,
+.page-hero .btn.ghost,
+.on-dark .btn.ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.hero .btn.ghost:hover,
+.page-hero .btn.ghost:hover,
+.on-dark .btn.ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: #fff;
+}
+.btn.outline {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn.outline:hover {
+  background: var(--ink);
+  color: #fff;
 }

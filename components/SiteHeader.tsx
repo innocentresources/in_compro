@@ -28,7 +28,7 @@ export default function SiteHeader() {
       <div className="wrap">
         <div className="bar">
           <Link href="/" className="brand" aria-label="Innocent Resources home">
-            <Image src="/logo.svg" alt="" width={46} height={46} priority />
+            <Image src="/mark-white.svg" alt="" width={72} height={46} priority />
             <span className="brand-text">
               <strong>Innocent Resources</strong>
               <span>Corporation Limited</span>

@@ -42,7 +42,7 @@ export default async function InsightsPage({
 
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero photo-hero hero-insights">
         <div className="wrap">
           <span className="eyebrow light">Insights</span>
           <h1 className="display">News and company updates.</h1>

@@ -13,6 +13,12 @@ export const photos = {
     credit: "Bernd Dittrich / Unsplash",
     position: "60% 50%",
   },
+  terrain: {
+    src: "/img/rock-terrain.jpg",
+    alt: "Weathered granite boulders on a rocky desert plain under a stormy sky",
+    credit: "Lesly Derksen / Unsplash",
+    position: "50% 55%",
+  },
   spitzkoppe: {
     src: "/img/hero-spitzkoppe.jpg",
     alt: "Granite peaks at Spitzkoppe, Namibia, at dusk",

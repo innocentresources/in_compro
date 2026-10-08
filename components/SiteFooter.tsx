@@ -7,13 +7,13 @@ export default function SiteFooter() {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <div className="brand" style={{ marginBottom: 20 }}>
-              <Image src="/logo.svg" alt="" width={46} height={46} />
-              <span className="brand-text">
-                <strong style={{ color: "#fff" }}>Innocent Resources</strong>
-                <span>Corporation Limited</span>
-              </span>
-            </div>
+            <Image
+              src="/logo-white.svg"
+              alt="Innocent Resources"
+              width={260}
+              height={167}
+              className="footer-logo"
+            />
             <p style={{ maxWidth: "40ch" }}>
               Mining and mineral development in Namibia, Botswana and South
               Africa.

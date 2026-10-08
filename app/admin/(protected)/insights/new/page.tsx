@@ -14,6 +14,7 @@ export default function NewInsightPage() {
   const [content, setContent] = useState("");
   const [category, setCategory] = useState<Category>("PRESS_RELEASE");
   const [status, setStatus] = useState<Status>("DRAFT");
+  const [publishDate, setPublishDate] = useState(""); // empty = today
 
   const [coverImage, setCoverImage] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -65,6 +66,7 @@ export default function NewInsightPage() {
           category,
           status,
           coverImage,
+          createdAt: publishDate || undefined,
         }),
       });
 
@@ -136,6 +138,18 @@ export default function NewInsightPage() {
             <option value="DRAFT">Draft</option>
             <option value="PUBLISHED">Published</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Publish date (optional, defaults to today)
+          </label>
+          <input
+            type="date"
+            value={publishDate}
+            onChange={(e) => setPublishDate(e.target.value)}
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-white"
+          />
         </div>
 
         <div>

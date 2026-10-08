@@ -15,6 +15,7 @@ type Insight = {
   category: Category;
   status: Status;
   coverImage: string | null;
+  createdAt: string;
 };
 
 export default function EditInsightPage() {
@@ -100,6 +101,7 @@ export default function EditInsightPage() {
           category: data.category,
           status: data.status,
           coverImage: data.coverImage,
+          createdAt: data.createdAt,
         }),
       });
 
@@ -195,6 +197,16 @@ export default function EditInsightPage() {
             <option value="DRAFT">Draft</option>
             <option value="PUBLISHED">Published</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">Publish date</label>
+          <input
+            type="date"
+            value={data.createdAt.slice(0, 10)}
+            onChange={(e) => setData({ ...data, createdAt: e.target.value })}
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-white"
+          />
         </div>
 
         <div>
