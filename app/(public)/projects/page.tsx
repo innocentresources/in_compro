@@ -24,7 +24,7 @@ const notPublished = [
 export default function ProjectsPage() {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero photo-hero hero-projects">
         <div className="wrap">
           <span className="eyebrow light">Projects</span>
           <h1 className="display">Portfolio across three jurisdictions.</h1>

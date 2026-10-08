@@ -26,7 +26,7 @@ const pillars = [
 export default function SustainabilityPage() {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero photo-hero hero-sustainability">
         <div className="wrap">
           <span className="eyebrow light">Sustainability</span>
           <h1 className="display">Responsible from the first field visit.</h1>

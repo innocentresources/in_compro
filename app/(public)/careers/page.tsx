@@ -29,7 +29,7 @@ const disciplines = [
 export default function CareersPage() {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero photo-hero hero-careers">
         <div className="wrap">
           <span className="eyebrow light">Careers</span>
           <h1 className="display">Work with a growing mineral company.</h1>

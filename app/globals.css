@@ -1100,3 +1100,17 @@ img {
   color: #fff;
   text-align: center;
 }
+
+/* ---------- Page header photos ---------- */
+.hero-projects {
+  --hero-img: url(/img/hdr-projects.jpg);
+}
+.hero-sustainability {
+  --hero-img: url(/img/hdr-sustainability.jpg);
+}
+.hero-careers {
+  --hero-img: url(/img/hdr-careers.jpg);
+}
+.hero-insights {
+  --hero-img: url(/img/hdr-insights.jpg);
+}
