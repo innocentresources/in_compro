@@ -116,10 +116,6 @@ export default function CompanyPage() {
               </p>
             </div>
           </div>
-          <p className="notice reveal" style={{ marginTop: 24 }}>
-            Mission and vision describe the company&apos;s ambitions. They are
-            not statements of current achievement.
-          </p>
         </div>
       </section>
 
