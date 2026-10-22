@@ -1,4 +1,4 @@
-import Photo, { photos } from "@/components/Photo";
+import { photos } from "@/components/Photo";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { jurisdictions } from "@/lib/site";
@@ -60,12 +60,14 @@ export default function CompanyPage() {
 
       {/* Who we are */}
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Who we are</span>
             <h2 className="h2">
               Projects advanced from exploration through to operations.
             </h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 Innocent Resources Corporation Limited operates across Southern
@@ -80,11 +82,9 @@ export default function CompanyPage() {
               </p>
             </div>
           </div>
-          <Photo photo={photos.pit} className="reveal" />
         </div>
       </section>
-
-      {/* Mission / vision / values */}
+{/* Mission / vision / values */}
       <section className="section paper">
         <div className="wrap">
           <div className="reveal">

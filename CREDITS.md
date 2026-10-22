@@ -5,7 +5,6 @@ All photographs are illustrative stock images. They are not company sites or ass
 | File | Photographer | Source | Licence | Used on |
 |---|---|---|---|---|
 | public/img/hero-spitzkoppe.jpg | Nir Himi | Unsplash | Unsplash License | Home hero |
-| public/img/open-pit.jpg | Matthew de Livera | Unsplash | Unsplash License | Home, Company, Careers |
 | public/img/rock-terrain.jpg | Lesly Derksen | Unsplash | Unsplash License | Sustainability (intro photo) |
 | public/img/copper-rock.jpg | Paul-Alain Hunt | Unsplash | Unsplash License | Insights (copper article) |
 | public/img/namibia-dunes.jpg | Jules Bassoleil | Unsplash | Unsplash License | Company (Namibia jurisdiction card) |

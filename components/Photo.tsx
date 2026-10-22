@@ -1,12 +1,6 @@
 import Image from "next/image";
 
 export const photos = {
-  pit: {
-    src: "/img/open-pit.jpg",
-    alt: "Terraced walls of a large open-pit mine under a cloudy sky",
-    credit: "Matthew de Livera / Unsplash",
-    position: "50% 72%",
-  },
   terrain: {
     src: "/img/rock-terrain.jpg",
     alt: "Weathered granite boulders on a rocky desert plain under a stormy sky",
