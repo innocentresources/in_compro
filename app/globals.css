@@ -1169,3 +1169,26 @@ img {
   background: var(--ink);
   color: #fff;
 }
+
+/* ---------- Text-only two-column sections ---------- */
+.split.top .list-clean {
+  margin-top: 0;
+}
+@media (min-width: 900px) {
+  .split.top {
+    align-items: start;
+  }
+  .split.top > :last-child {
+    padding-top: 42px;
+  }
+}
+
+/* Never leave an empty cell at the end of a three-column grid */
+@media (min-width: 900px) {
+  .grid.cols-3 > .cell:last-child:nth-child(3n + 2) {
+    grid-column: span 2;
+  }
+  .grid.cols-3 > .cell:last-child:nth-child(3n + 1) {
+    grid-column: span 3;
+  }
+}

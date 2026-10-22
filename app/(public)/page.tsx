@@ -1,4 +1,4 @@
-import Photo, { photos } from "@/components/Photo";
+import { photos } from "@/components/Photo";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { jurisdictions } from "@/lib/site";
@@ -68,8 +68,8 @@ export default function HomePage() {
               <span>Jurisdictions: Namibia, Botswana, South Africa</span>
             </div>
             <div className="fact">
-              <b>7</b>
-              <span>Commodities in focus, plus precious stones</span>
+              <b>5</b>
+              <span>Commodity groups across the portfolio</span>
             </div>
             <div className="fact">
               <b>Sandton</b>
@@ -85,12 +85,14 @@ export default function HomePage() {
 
       {/* Profile */}
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Company profile</span>
             <h2 className="h2">
               A multi-commodity mining company with a disciplined approach.
             </h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 Innocent Resources Corporation Limited describes itself as an
@@ -106,7 +108,6 @@ export default function HomePage() {
               </Link>
             </p>
           </div>
-          <Photo photo={photos.pit} className="reveal" />
         </div>
       </section>
 
@@ -137,7 +138,7 @@ export default function HomePage() {
           <div className="reveal">
             <span className="eyebrow">Portfolio</span>
             <h2 className="h2" style={{ maxWidth: "22ch" }}>
-              Three jurisdictions, seven commodities.
+              Three jurisdictions.
             </h2>
             <p className="lede">
               The company is active in Namibia, South Africa and Botswana. Commodities
@@ -174,8 +175,7 @@ export default function HomePage() {
 
       {/* Approach */}
       <section className="section paper">
-        <div className="wrap split">
-          <Photo photo={photos.kalahari} className="reveal" />
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Our approach</span>
             <h2 className="h2">
@@ -187,24 +187,24 @@ export default function HomePage() {
                 and transparent stakeholder engagement at every stage.
               </p>
             </div>
-            <ul className="list-clean">
-              <li>
-                <span>01</span>Disciplined capital allocation and project
-                evaluation
-              </li>
-              <li>
-                <span>02</span>Emphasis on safety, compliance and risk
-                management
-              </li>
-              <li>
-                <span>03</span>ESG principles built into operational decisions
-              </li>
-              <li>
-                <span>04</span>Long-term relationships with host communities and
-                regulators
-              </li>
-            </ul>
           </div>
+          <ul className="list-clean reveal">
+            <li>
+              <span>01</span>Disciplined capital allocation and project
+              evaluation
+            </li>
+            <li>
+              <span>02</span>Emphasis on safety, compliance and risk
+              management
+            </li>
+            <li>
+              <span>03</span>ESG principles built into operational decisions
+            </li>
+            <li>
+              <span>04</span>Long-term relationships with host communities and
+              regulators
+            </li>
+          </ul>
         </div>
       </section>
 

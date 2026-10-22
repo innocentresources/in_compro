@@ -182,10 +182,12 @@ export default function CompanyPage() {
 
       {/* Contact */}
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Contact</span>
             <h2 className="h2">Speak with the company.</h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 For general enquiries, partnerships or operational matters,
@@ -198,7 +200,6 @@ export default function CompanyPage() {
               </Link>
             </p>
           </div>
-          <Photo photo={photos.kalahari} className="reveal" />
         </div>
       </section>
     </>

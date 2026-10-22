@@ -7,12 +7,6 @@ export const photos = {
     credit: "Matthew de Livera / Unsplash",
     position: "50% 72%",
   },
-  kalahari: {
-    src: "/img/kalahari-dusk.jpg",
-    alt: "Sunset over a wide Kalahari plain with scattered acacia trees",
-    credit: "Bernd Dittrich / Unsplash",
-    position: "60% 50%",
-  },
   terrain: {
     src: "/img/rock-terrain.jpg",
     alt: "Weathered granite boulders on a rocky desert plain under a stormy sky",
