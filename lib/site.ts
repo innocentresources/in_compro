@@ -6,39 +6,20 @@
 export type Jurisdiction = {
   country: string;
   commodities: string[];
-  stageKey: "plan" | "ops" | "asset";
-  stageLabel: string;
-  description: string;
-  siteWording: string;
 };
 
 export const jurisdictions: Jurisdiction[] = [
   {
     country: "Namibia",
-    commodities: ["Lithium", "Copper", "Gold"],
-    stageKey: "plan",
-    stageLabel: "Exploration & development",
-    description:
-      "Namibia is the company's exploration and development focus, covering lithium, copper and gold.",
-    siteWording: "Lithium, copper, and gold exploration and development.",
+    commodities: ["Base metals", "Precious metals / rare earths"],
   },
   {
     country: "South Africa",
-    commodities: ["Chrome", "Platinum", "Titanium"],
-    stageKey: "ops",
-    stageLabel: "Operations focus",
-    description:
-      "South Africa is the company's operations focus, covering chrome, platinum and titanium, and is home to its head office in Sandton.",
-    siteWording: "Chrome, platinum, and titanium operations.",
+    commodities: ["Chrome", "Platinum group metals"],
   },
   {
     country: "Botswana",
-    commodities: ["Diamonds", "Precious stones"],
-    stageKey: "asset",
-    stageLabel: "Asset holding",
-    description:
-      "Botswana is where the company describes holding diamond and precious stone assets.",
-    siteWording: "Diamonds and precious stone assets.",
+    commodities: ["Precious stones"],
   },
 ];
 

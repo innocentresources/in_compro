@@ -1,13 +1,7 @@
-import Photo, { photos } from "@/components/Photo";
+import { photos } from "@/components/Photo";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { jurisdictions } from "@/lib/site";
-
-const jurisPhotos = {
-  Namibia: photos.namibiaDunes,
-  "South Africa": photos.southAfricaCanyon,
-  Botswana: photos.botswanaSky,
-} as const;
 
 export const metadata: Metadata = {
   title: "Company overview",
@@ -60,12 +54,14 @@ export default function CompanyPage() {
 
       {/* Who we are */}
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Who we are</span>
             <h2 className="h2">
               Projects advanced from exploration through to operations.
             </h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 Innocent Resources Corporation Limited operates across Southern
@@ -80,11 +76,9 @@ export default function CompanyPage() {
               </p>
             </div>
           </div>
-          <Photo photo={photos.pit} className="reveal" />
         </div>
       </section>
-
-      {/* Mission / vision / values */}
+{/* Mission / vision / values */}
       <section className="section paper">
         <div className="wrap">
           <div className="reveal">
@@ -133,16 +127,6 @@ export default function CompanyPage() {
           <div className="juris-grid reveal">
             {jurisdictions.map((j) => (
               <article className="juris" key={j.country}>
-                <div className="juris-photo">
-                  <img
-                    src={jurisPhotos[j.country as keyof typeof jurisPhotos].src}
-                    alt={jurisPhotos[j.country as keyof typeof jurisPhotos].alt}
-                    style={{
-                      objectPosition:
-                        jurisPhotos[j.country as keyof typeof jurisPhotos].position,
-                    }}
-                  />
-                </div>
                 <div className="juris-head">
                   <div className="country">{j.country}</div>
                 </div>
@@ -182,10 +166,12 @@ export default function CompanyPage() {
 
       {/* Contact */}
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Contact</span>
             <h2 className="h2">Speak with the company.</h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 For general enquiries, partnerships or operational matters,
@@ -198,7 +184,6 @@ export default function CompanyPage() {
               </Link>
             </p>
           </div>
-          <Photo photo={photos.kalahari} className="reveal" />
         </div>
       </section>
     </>

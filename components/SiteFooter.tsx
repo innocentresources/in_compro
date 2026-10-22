@@ -15,8 +15,7 @@ export default function SiteFooter() {
               className="footer-logo"
             />
             <p style={{ maxWidth: "40ch" }}>
-              Mining and mineral development in Namibia, Botswana and South
-              Africa.
+              Mining and mineral development in Southern Africa.
             </p>
           </div>
 

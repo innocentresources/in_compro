@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Photo, { photos } from "@/components/Photo";
 import { contact } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -41,10 +40,12 @@ export default function CareersPage() {
       </section>
 
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">How to apply</span>
             <h2 className="h2">No open roles are listed at present.</h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 We do not currently advertise vacancies on this site. If your
@@ -59,7 +60,6 @@ export default function CareersPage() {
               </a>
             </p>
           </div>
-          <Photo photo={photos.pit} className="reveal" />
         </div>
       </section>
 

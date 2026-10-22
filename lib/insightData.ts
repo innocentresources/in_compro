@@ -23,7 +23,7 @@ export const insights: Insight[] = [
 
 Finding copper is a staged process. Exploration typically begins with desktop review of existing geological data, followed by geological mapping and surface sampling. Geochemical and geophysical surveys can then help to identify targets worth testing. Drilling comes later, and only drilling and laboratory analysis can show whether a mineral occurrence is large and consistent enough to be considered a resource.
 
-At Innocent Resources Corporation Limited, Namibia is the focus for exploration and development, covering lithium, copper and gold. The company's work there is at an early stage. This article is a general industry perspective. It does not report drilling results, resource estimates or production, and none have been published.
+At Innocent Resources Corporation Limited, Exploration and development in Namibia is focused on base metals and precious metals / rare earths. The company's work there is at an early stage. This article is a general industry perspective. It does not report drilling results, resource estimates or production, and none have been published.
 
 Readers should not treat any statement here as a forecast of exploration outcomes. Future updates will be published as the company is able to share verified information.`,
     category: "BLOG",
