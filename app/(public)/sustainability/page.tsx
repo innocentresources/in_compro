@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Photo, { photos } from "@/components/Photo";
 
 export const metadata: Metadata = {
   title: "Sustainability",
@@ -38,10 +37,12 @@ export default function SustainabilityPage() {
       </section>
 
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap split top">
           <div className="reveal">
             <span className="eyebrow">Our intent</span>
             <h2 className="h2">What we aim to do.</h2>
+          </div>
+          <div className="reveal">
             <div className="prose">
               <p>
                 Mining and exploration change land. Our aim is to keep that
@@ -51,7 +52,6 @@ export default function SustainabilityPage() {
               </p>
             </div>
           </div>
-          <Photo photo={photos.terrain} className="reveal" />
         </div>
       </section>
 

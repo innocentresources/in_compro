@@ -5,7 +5,6 @@ All photographs are illustrative stock images. They are not company sites or ass
 | File | Photographer | Source | Licence | Used on |
 |---|---|---|---|---|
 | public/img/hero-spitzkoppe.jpg | Nir Himi | Unsplash | Unsplash License | Home hero |
-| public/img/rock-terrain.jpg | Lesly Derksen | Unsplash | Unsplash License | Sustainability (intro photo) |
 | public/img/copper-rock.jpg | Paul-Alain Hunt | Unsplash | Unsplash License | Insights (copper article) |
 | public/img/hdr-insights.jpg (cropped from the original) | Jules Bassoleil | Unsplash | Unsplash License | Insights (page header) |
 | public/img/hdr-sustainability.jpg (cropped from the original) | Arthur Hickinbotham | Unsplash | Unsplash License | Sustainability (page header) |
