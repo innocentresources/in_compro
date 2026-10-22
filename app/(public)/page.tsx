@@ -45,8 +45,8 @@ export default function HomePage() {
           </h1>
           <p className="lede">
             Innocent Resources Corporation Limited advances exploration,
-            mining and beneficiation of critical minerals across Namibia,
-            Botswana and South Africa.
+            mining and beneficiation of critical minerals across Southern
+            Africa.
           </p>
           <div className="hero-actions">
             <Link href="/projects" className="btn">
@@ -65,7 +65,7 @@ export default function HomePage() {
           <div className="facts-grid">
             <div className="fact">
               <b>3</b>
-              <span>Jurisdictions: Namibia, Botswana, South Africa</span>
+              <span>Jurisdictions across Southern Africa</span>
             </div>
             <div className="fact">
               <b>5</b>
@@ -141,7 +141,7 @@ export default function HomePage() {
               Three jurisdictions.
             </h2>
             <p className="lede">
-              The company is active in Namibia, South Africa and Botswana. Commodities
+              The company is active across Southern Africa. Commodities
               in focus are shown for each country.
             </p>
           </div>
