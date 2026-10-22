@@ -13,24 +13,6 @@ export const photos = {
     credit: "Nir Himi / Unsplash",
     position: "50% 60%",
   },
-  namibiaDunes: {
-    src: "/img/namibia-dunes.jpg",
-    alt: "Red sand dunes and camel thorn trees in the Namib desert",
-    credit: "Jules Bassoleil / Unsplash",
-    position: "50% 55%",
-  },
-  southAfricaCanyon: {
-    src: "/img/south-africa-canyon.jpg",
-    alt: "A river canyon in the Mpumalanga escarpment, South Africa",
-    credit: "Arthur Hickinbotham / Unsplash",
-    position: "50% 45%",
-  },
-  botswanaSky: {
-    src: "/img/botswana-sky.jpg",
-    alt: "A storm cloud over open grassland in Botswana",
-    credit: "Hans-Jurgen Mager / Unsplash",
-    position: "50% 60%",
-  },
   canyonSunset: {
     src: "/img/canyon-sunset.jpg",
     alt: "A desert canyon at sunset in Southern Africa",

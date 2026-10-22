@@ -7,10 +7,10 @@ All photographs are illustrative stock images. They are not company sites or ass
 | public/img/hero-spitzkoppe.jpg | Nir Himi | Unsplash | Unsplash License | Home hero |
 | public/img/rock-terrain.jpg | Lesly Derksen | Unsplash | Unsplash License | Sustainability (intro photo) |
 | public/img/copper-rock.jpg | Paul-Alain Hunt | Unsplash | Unsplash License | Insights (copper article) |
-| public/img/namibia-dunes.jpg | Jules Bassoleil | Unsplash | Unsplash License | Company (Namibia jurisdiction card) |
-| public/img/south-africa-canyon.jpg | Arthur Hickinbotham | Unsplash | Unsplash License | Company (South Africa jurisdiction card) |
-| public/img/botswana-sky.jpg | Hans-Jurgen Mager | Unsplash | Unsplash License | Company (Botswana jurisdiction card) |
-| public/img/canyon-sunset.jpg | Andrew Svk | Unsplash | Unsplash License | Home (photo band) |
+| public/img/hdr-insights.jpg (cropped from the original) | Jules Bassoleil | Unsplash | Unsplash License | Insights (page header) |
+| public/img/hdr-sustainability.jpg (cropped from the original) | Arthur Hickinbotham | Unsplash | Unsplash License | Sustainability (page header) |
+| public/img/hdr-careers.jpg (cropped from the original) | Hans-Jurgen Mager | Unsplash | Unsplash License | Careers (page header) |
+| public/img/canyon-sunset.jpg | Andrew Svk | Unsplash | Unsplash License | Home (photo band); Projects (page header, cropped as hdr-projects.jpg) |
 | public/img/dune-curve.jpg | Chris Stenger | Unsplash | Unsplash License | Company (page header) |
 | public/img/quarry-mpumalanga.jpg | Mukovhe Mavhungu | Unsplash | Unsplash License | UNUSED (Hitachi/Volvo branding visible) |
 

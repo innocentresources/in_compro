@@ -3,12 +3,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { jurisdictions } from "@/lib/site";
 
-const jurisPhotos = {
-  Namibia: photos.namibiaDunes,
-  "South Africa": photos.southAfricaCanyon,
-  Botswana: photos.botswanaSky,
-} as const;
-
 export const metadata: Metadata = {
   title: "Company overview",
   description:
@@ -133,16 +127,6 @@ export default function CompanyPage() {
           <div className="juris-grid reveal">
             {jurisdictions.map((j) => (
               <article className="juris" key={j.country}>
-                <div className="juris-photo">
-                  <img
-                    src={jurisPhotos[j.country as keyof typeof jurisPhotos].src}
-                    alt={jurisPhotos[j.country as keyof typeof jurisPhotos].alt}
-                    style={{
-                      objectPosition:
-                        jurisPhotos[j.country as keyof typeof jurisPhotos].position,
-                    }}
-                  />
-                </div>
                 <div className="juris-head">
                   <div className="country">{j.country}</div>
                 </div>
