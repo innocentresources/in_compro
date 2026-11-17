@@ -23,7 +23,7 @@ export const jurisdictions: Jurisdiction[] = [
   },
   {
     country: "Rwanda",
-    commodities: ["Critical minerals", "3Ts: tin, tantalum, tungsten"],
+    commodities: ["Critical minerals", "3Ts"],
   },
   {
     country: "Malawi",
