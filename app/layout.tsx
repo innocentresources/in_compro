@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     template: "%s | Innocent Resources",
   },
   description:
-    "Innocent Resources Corporation Limited is a mining and mineral development company focused on Southern Africa.",
+    "Innocent Resources Corporation Limited is a mining and mineral development company active across Africa.",
   openGraph: {
     type: "website",
     siteName: "Innocent Resources",
     title: "Innocent Resources Corporation Limited",
     description:
-      "Responsible mineral development across Southern Africa.",
+      "Responsible mineral development across Africa.",
     images: [
       {
         url: "/img/og.jpg",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Innocent Resources Corporation Limited",
     description:
-      "Responsible mineral development across Southern Africa.",
+      "Responsible mineral development across Africa.",
     images: ["/img/og.jpg"],
   },
   robots: { index: true, follow: true },

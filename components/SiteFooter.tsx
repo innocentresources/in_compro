@@ -15,7 +15,7 @@ export default function SiteFooter() {
               className="footer-logo"
             />
             <p style={{ maxWidth: "40ch" }}>
-              Mining and mineral development in Southern Africa.
+              Mining and mineral development across Africa.
             </p>
           </div>
 
