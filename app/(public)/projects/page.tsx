@@ -27,7 +27,7 @@ export default function ProjectsPage() {
       <section className="page-hero photo-hero hero-projects">
         <div className="wrap">
           <span className="eyebrow light">Projects</span>
-          <h1 className="display">Portfolio across three jurisdictions.</h1>
+          <h1 className="display">Portfolio across five jurisdictions.</h1>
           <p className="lede">
             An overview of where the company is active and what it is
             targeting. Figures and results are shown only where the company has

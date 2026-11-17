@@ -7,7 +7,7 @@ export const photos = {
   },
   canyonSunset: {
     src: "/img/canyon-sunset.jpg",
-    alt: "A desert canyon at sunset in Southern Africa",
+    alt: "A desert canyon at sunset in Africa",
     credit: "Andrew Svk / Unsplash",
     position: "50% 55%",
   },

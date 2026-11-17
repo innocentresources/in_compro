@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { jurisdictions } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Mineral development in Southern Africa",
+  title: "Mineral development in Africa",
 };
 
 const pillars = [
@@ -41,11 +41,11 @@ export default function HomePage() {
             Mining &amp; mineral development
           </span>
           <h1 className="display">
-            Responsible mineral development in Southern Africa.
+            Responsible mineral development in Africa.
           </h1>
           <p className="lede">
             Innocent Resources Corporation Limited advances exploration,
-            mining and beneficiation of critical minerals across Southern
+            mining and beneficiation of critical minerals across
             Africa.
           </p>
           <div className="hero-actions">
@@ -64,12 +64,12 @@ export default function HomePage() {
         <div className="wrap">
           <div className="facts-grid">
             <div className="fact">
-              <b>3</b>
-              <span>Jurisdictions across Southern Africa</span>
+              <b>5</b>
+              <span>Jurisdictions across Africa</span>
             </div>
             <div className="fact">
-              <b>5</b>
-              <span>Commodity groups across the portfolio</span>
+              <b>Critical minerals</b>
+              <span>Focus across the portfolio</span>
             </div>
             <div className="fact">
               <b>Sandton</b>
@@ -138,10 +138,10 @@ export default function HomePage() {
           <div className="reveal">
             <span className="eyebrow">Portfolio</span>
             <h2 className="h2" style={{ maxWidth: "22ch" }}>
-              Three jurisdictions.
+              Five jurisdictions.
             </h2>
             <p className="lede">
-              The company is active across Southern Africa. Commodities
+              The company is active across Africa. Commodities
               in focus are shown for each country.
             </p>
           </div>

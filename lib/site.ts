@@ -21,6 +21,14 @@ export const jurisdictions: Jurisdiction[] = [
     country: "Botswana",
     commodities: ["Precious stones"],
   },
+  {
+    country: "Rwanda",
+    commodities: ["Critical minerals", "3Ts"],
+  },
+  {
+    country: "Malawi",
+    commodities: ["Critical minerals", "Rare earth elements"],
+  },
 ];
 
 /** Canonical origin for sitemap, robots and share links. */

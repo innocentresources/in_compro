@@ -618,7 +618,13 @@ img {
 }
 @media (min-width: 1000px) {
   .juris-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .juris-grid > .juris {
+    grid-column: span 2;
+  }
+  .juris-grid > .juris:nth-child(n + 4) {
+    grid-column: span 3;
   }
 }
 

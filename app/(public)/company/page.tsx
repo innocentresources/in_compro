@@ -47,7 +47,7 @@ export default function CompanyPage() {
           <p className="lede">
             Innocent Resources Corporation Limited focuses on responsible
             extraction, disciplined operations and long-term resource
-            stewardship across Southern Africa.
+            stewardship across Africa.
           </p>
         </div>
       </section>
@@ -120,8 +120,8 @@ export default function CompanyPage() {
             <span className="eyebrow">Where we work</span>
             <h2 className="h2">Geographic focus.</h2>
             <p className="lede">
-              The company&apos;s activities are concentrated in three
-              jurisdictions in Southern Africa.
+              The company&apos;s activities are concentrated in five
+              jurisdictions across Africa.
             </p>
           </div>
           <div className="juris-grid reveal">
